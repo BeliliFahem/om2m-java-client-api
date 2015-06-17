@@ -1,0 +1,7 @@
+# Ignorer les objets et les archives
+*.[oa]
+
+logs/
+
+target/
+
