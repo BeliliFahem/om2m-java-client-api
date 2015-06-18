@@ -13,8 +13,7 @@
  ******************************************************************************/
 
 /**
- * 
  * @author Belili Fahem - belili.fahem@gmail.com
- *
  */
+
 package fr.lissi.belilif.util.jaxb;

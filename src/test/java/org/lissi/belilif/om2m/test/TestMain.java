@@ -78,7 +78,7 @@ public class TestMain {
 		// 1- create an application "MyApp1"
 		OM2MApplication myApp1 = new OM2MApplication();
 
-		myApp1.setAppId("MyApp4");
+		myApp1.setAppId("MyApp5");
 
 		List<String> searchStrings = Arrays.asList(new String[] { "A/Z", "B/Y", "C/X" });
 		myApp1.setSearchStrings(searchStrings);

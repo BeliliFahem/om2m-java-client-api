@@ -60,8 +60,7 @@ public class ApplicationManager extends AbstractOm2mManager<OM2MApplication, OM2
 			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications", appInXML, this.headers);
 			LOGGER.info("Application '"+obj.getAppId()+"' creation status : "+resp);
 		} catch (HttpResponseException e) {
-			// TODO delete trace
-			e.printStackTrace();
+			// TODO elevate exception
 			resp = e.getStatusCode();
 			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage() + "\n"+
 					"Unable to create the application '"+obj.getAppId()+"' with "+ this.OM2MUrlBase + "applications");
