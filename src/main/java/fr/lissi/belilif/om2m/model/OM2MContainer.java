@@ -31,8 +31,8 @@ public class OM2MContainer {
 	/** The container id. */
 	private String id;
 
-	/** The app. */
-	private OM2MApplication app;
+	/** The app id. */
+	private String appId;
 
 	/**
 	 * Instantiates a new OM2M container.
@@ -43,15 +43,16 @@ public class OM2MContainer {
 	/**
 	 * Instantiates a new OM2M container.
 	 *
+	 * @param appId
+	 *            the app id
+	 *            
 	 * @param containerId
 	 *            the container id
-	 * @param app
-	 *            the app
 	 */
-	public OM2MContainer(String containerId, OM2MApplication app) {
+	public OM2MContainer(String appId, String containerId) {
 		super();
 		this.id = containerId;
-		this.app = app;
+		this.appId = appId;
 	}
 
 	/**
@@ -79,8 +80,8 @@ public class OM2MContainer {
 	 * @return the app
 	 */
 	@XmlTransient
-	public OM2MApplication getApp() {
-		return app;
+	public String getAppId() {
+		return appId;
 	}
 
 	/**
@@ -89,8 +90,8 @@ public class OM2MContainer {
 	 * @param app
 	 *            the new app
 	 */
-	public void setApp(OM2MApplication app) {
-		this.app = app;
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
 }

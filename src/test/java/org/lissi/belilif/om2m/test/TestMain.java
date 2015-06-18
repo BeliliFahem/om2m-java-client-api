@@ -47,12 +47,11 @@ public class TestMain {
 	 */
 	public static void main(String[] args) {
 		
-		scenarioTest1();
+//		scenarioTest1();
 
 //		testExistApp();
 		
-//		testExistContainer();
-
+		testExistContainer();
 	}
 
 	/**
@@ -78,7 +77,8 @@ public class TestMain {
 		// 1- create an application "MyApp1"
 		OM2MApplication myApp1 = new OM2MApplication();
 
-		myApp1.setAppId("MyApp5");
+		String appId = "MyApp6";
+		myApp1.setAppId(appId);
 
 		List<String> searchStrings = Arrays.asList(new String[] { "A/Z", "B/Y", "C/X" });
 		myApp1.setSearchStrings(searchStrings);
@@ -91,16 +91,16 @@ public class TestMain {
 		//		containerManager.addDecriptor(new OM2MContainer("DESCRIPTOR", myApp1)); // The DECRIPTOR container is defined by default, so we don
 
 		// 3- create a container for data named "MyData1"
-		OM2MContainer container = new OM2MContainer("MyData1", myApp1);
+		OM2MContainer container = new OM2MContainer(appId, "MyData1");
 		containerManager.create(container);
 		// MyData2
-		container = new OM2MContainer("MyData2", myApp1);
+		container = new OM2MContainer(appId, "MyData2");
 		containerManager.create(container);
 
 		// 4- create a data contentInstance
 		ContentInstanceManager contentInstanceManager = (ContentInstanceManager) Om2mManagersFactorty
 				.getManager(Om2mManagersFactorty.CONTENT_INSTANCE_MANAGER);
-		contentInstanceManager.create(new OM2MContentInstance(container, "50"));
+		contentInstanceManager.create(new OM2MContentInstance(appId, "MyData1", "60"));
 
 	}
 
@@ -109,12 +109,10 @@ public class TestMain {
 	 */
 	private static void testExistApp() {
 
-		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW4vYWRtaW4=");
+		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
 
-		// 1- create an application "MyApp1"
-		OM2MApplication myApp1 = new OM2MApplication();
-
-		myApp1.setAppId("patient00005");
+		// create OM2MApplication java object
+		OM2MApplication myApp1 = new OM2MApplication("MyApp1");
 
 		ApplicationManager appManager = (ApplicationManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.APP_MANAGER);
 		System.out.println( appManager.exist(myApp1));
@@ -126,12 +124,12 @@ public class TestMain {
 	 */
 	private static void testExistContainer() {
 		
-		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW4vYWRtaW4=");
+		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
 		
 		ContainerManager containerManager = (ContainerManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
 		
-		OM2MContainer containerSPO2 = new OM2MContainer("spo2", new OM2MApplication("patient00004"));
-		System.out.println( containerManager.exist(containerSPO2) );
+		OM2MContainer container = new OM2MContainer("MyApp6", "MyData1");
+		System.out.println( containerManager.exist(container) );
 		
 	}
 

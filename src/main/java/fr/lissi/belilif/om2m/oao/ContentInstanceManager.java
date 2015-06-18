@@ -50,18 +50,19 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 */
 	@Override
 	public int create(OM2MContentInstance obj) {
-		LOGGER.info("Create ContentInstance for " + obj.getContainer().getApp().getAppId()+"/"+obj.getContainer().getId());
+		LOGGER.info("Create ContentInstance for " + obj.getAppId()+"/"+obj.getContainerId());
 		int resp = -1;
 		try {
-			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getContainer().getApp().getAppId()
-					+ "/containers/" + obj.getContainer().getId() + "/contentInstances", obj.getBody(), this.headers);
+			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getAppId()
+					+ "/containers/" + obj.getContainerId() + "/contentInstances", obj.getBody(), this.headers);
 			
-			LOGGER.info("ContentInstance creation in '" + obj.getContainer().getApp().getAppId() + "/" + obj.getContainer().getId()
+			LOGGER.info("ContentInstance creation in '" + obj.getAppId() + "/" + obj.getContainerId()
 					+ "' status : " + resp);
 			LOGGER.debug("ContentInstance body : \n" + obj.getBody());
 		} catch (HttpResponseException e) {
 			resp = e.getStatusCode();
 			LOGGER.info(e.getStatusCode() + " / " + e.getMessage());
+			e.printStackTrace();
 		} catch (ClientProtocolException e) {
 			// TODO ClientProtocolException
 			e.printStackTrace();
@@ -89,7 +90,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 		LOGGER.info("Create : \n" + JAXBMapper.objectToXMLString(obj));
 		int resp = -1;
 		try {
-			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getContainer().getApp().getAppId()
+			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getAppId()
 					+ "/containers/" + JAXBMapper.objectToXMLString(subscription) + "/contentInstances/subscriptions", obj.getBody(),
 					this.headers);
 		} catch (HttpResponseException e) {

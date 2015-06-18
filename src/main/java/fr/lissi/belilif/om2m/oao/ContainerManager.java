@@ -57,16 +57,16 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 //			LOGGER.info("Le container existe");
 //		} // else System.out.println("Le container n'existe pas.");
 
-		LOGGER.debug("Container to create in '"+obj.getApp().getAppId()+"' : \n" + JAXBMapper.objectToXMLString(obj));
-		LOGGER.info("Container to create in '"+obj.getApp().getAppId()+"' : " + obj.getId());
+		LOGGER.debug("Container to create in '"+obj.getAppId()+"' : \n" + JAXBMapper.objectToXMLString(obj));
+		LOGGER.info("Container to create in '"+obj.getAppId()+"' : " + obj.getId());
 		int resp = -1;
 		try {
-			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getApp().getAppId() + "/containers",
+			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications/" + obj.getAppId() + "/containers",
 					JAXBMapper.objectToXMLString(obj), this.headers);
-			LOGGER.info("Container '"+obj.getId()+"' creation in '"+obj.getApp().getAppId()+"' status : "+resp);
+			LOGGER.info("Container '"+obj.getId()+"' creation in '"+obj.getAppId()+"' status : "+resp);
 		} catch (HttpResponseException e) {
 			resp = e.getStatusCode();
-			LOGGER.error(e.getStatusCode() + " / " + e.getMessage()+". "+this.OM2MUrlBase + "applications/" + obj.getApp().getAppId() + "/containers");
+			LOGGER.error(e.getStatusCode() + " / " + e.getMessage()+". "+this.OM2MUrlBase + "applications/" + obj.getAppId() + "/containers");
 		} catch (ClientProtocolException e) {
 			// TODO ClientProtocolException
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 		String resp = null;
 		try {
 			resp = WebServiceActions
-					.doGet(this.OM2MUrlBase + "applications/" + obj.getApp().getAppId() + "/containers/" + obj.getId(), headers);
+					.doGet(this.OM2MUrlBase + "applications/" + obj.getAppId() + "/containers/" + obj.getId(), headers);
 			if (resp.equals("200")) containerResponse = new OM2MContainerResponse();
 		} catch (HttpResponseException e) {
 			resp = e.getStatusCode() + "";
@@ -168,7 +168,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 		String resp = null;
 		try {
 			resp = WebServiceActions
-					.doGet(this.OM2MUrlBase + "applications/" + obj.getApp().getAppId() + "/containers/" + obj.getId(), headers);
+					.doGet(this.OM2MUrlBase + "applications/" + obj.getAppId() + "/containers/" + obj.getId(), headers);
 			if (resp.equals("200")) containerResponse = true;
 		} catch (HttpResponseException e) {
 			resp = e.getStatusCode() + "";

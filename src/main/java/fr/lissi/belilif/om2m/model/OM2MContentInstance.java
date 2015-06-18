@@ -21,9 +21,12 @@ package fr.lissi.belilif.om2m.model;
  * @author Belili Fahem - belili.fahem@gmail.com
  */
 public class OM2MContentInstance {
+	
+	/** The app id. */
+	private String appId;
 
-	/** The container. */
-	private OM2MContainer container;
+	/**  The container id. */
+	private String containerId;
 
 	/** The body. */
 	private String body;
@@ -36,31 +39,33 @@ public class OM2MContentInstance {
 	/**
 	 * Instantiates a new OM2M content instance.
 	 *
-	 * @param container the container
+	 * @param appId the app id
+	 * @param containerId the container id
 	 * @param body the body
 	 */
-	public OM2MContentInstance(OM2MContainer container, String body) {
+	public OM2MContentInstance(String appId,  String containerId, String body) {
 		super();
-		this.container = container;
+		this.appId = appId;
+		this.containerId = containerId;
 		this.body = body;
 	}
 
 	/**
-	 * Gets the container.
+	 * Gets the container id.
 	 *
 	 * @return the container
 	 */
-	public OM2MContainer getContainer() {
-		return container;
+	public String getContainerId() {
+		return containerId;
 	}
 
 	/**
-	 * Sets the container.
+	 * Sets the container id.
 	 *
-	 * @param container the new container
+	 * @param containerId the new container id
 	 */
-	public void setContainer(OM2MContainer container) {
-		this.container = container;
+	public void setContainerId(String containerId) {
+		this.containerId = containerId;
 	}
 
 	/**
@@ -79,6 +84,24 @@ public class OM2MContentInstance {
 	 */
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	/**
+	 * Gets the app id.
+	 *
+	 * @return the app id
+	 */
+	public String getAppId() {
+		return appId;
+	}
+
+	/**
+	 * Sets the app id.
+	 *
+	 * @param appId the new app id
+	 */
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
 }
