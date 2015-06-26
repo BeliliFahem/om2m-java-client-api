@@ -15,6 +15,7 @@ See more about OM2M Project : http://www.eclipse.org/om2m/.
 * Create a content Instance
 * Verify if an application exist
 * Verify if a container exist
+* Retrieve all applications, from the server, as list of Java objects.
 
 # Implemented functions in this version
 * Manage OM2M server responses
