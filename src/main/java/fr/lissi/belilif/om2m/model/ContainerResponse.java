@@ -11,59 +11,65 @@
  *     Belili Fahem -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
-
 package fr.lissi.belilif.om2m.model;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 
 /**
- * The Class OM2MApplication.
- *
+ * The Class ContainerResponse.
+ * 
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-@XmlRootElement(name = "application")
-@XmlType(propOrder = { "appId", "searchStrings" })
-public class OM2MApplication {
+@XmlRootElement(name = "container")
+public class ContainerResponse {
 
+	/** The id. */
+	private String id;
+	
 	/** The app id. */
 	private String appId;
 	
-	/** The search strings. */
-	private List<String> searchStrings;
+	/** The expiration time. */
+	private String expirationTime;
 
 	/**
-	 * Instantiates a new OM2M application.
+	 * Instantiates a new OM2M container response.
 	 */
-	public OM2MApplication() {}
+	public ContainerResponse() {}
 
 	/**
-	 * Instantiates a new OM2M application.
+	 * Instantiates a new OM2M container response.
 	 *
+	 * @param id the id
 	 * @param appId the app id
-	 * @param searchStrings the search strings
 	 */
-	public OM2MApplication(String appId, List<String> searchStrings) {
+	public ContainerResponse(String id, String appId) {
 		super();
+		this.id = id;
 		this.appId = appId;
-		this.searchStrings = searchStrings;
 	}
-	
+
 	/**
-	 * Instantiates a new OM2M application.
+	 * Gets the id.
 	 *
-	 * @param appId the app id
+	 * @return the id
 	 */
-	public OM2MApplication(String appId) {
-		super();
-		this.appId = appId;
+	@XmlAttribute(name="om2m:id")
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -71,7 +77,7 @@ public class OM2MApplication {
 	 *
 	 * @return the app id
 	 */
-	@XmlAttribute
+	@XmlTransient
 	public String getAppId() {
 		return appId;
 	}
@@ -86,22 +92,21 @@ public class OM2MApplication {
 	}
 
 	/**
-	 * Gets the search strings.
+	 * Gets the expiration time.
 	 *
-	 * @return the search strings
+	 * @return the expiration time
 	 */
-	@XmlElementWrapper(name = "searchStrings")
-	@XmlElement(name = "searchString")
-	public List<String> getSearchStrings() {
-		return searchStrings;
+	public String getExpirationTime() {
+		return expirationTime;
 	}
 
 	/**
-	 * Sets the search strings.
+	 * Sets the expiration time.
 	 *
-	 * @param searchStrings the new search strings
+	 * @param expirationTime the new expiration time
 	 */
-	public void setSearchStrings(List<String> searchStrings) {
-		this.searchStrings = searchStrings;
+	public void setExpirationTime(String expirationTime) {
+		this.expirationTime = expirationTime;
 	}
+
 }

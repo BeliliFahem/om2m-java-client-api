@@ -16,11 +16,11 @@ package fr.lissi.belilif.om2m.model;
 
 
 /**
- * The Class OM2MContentInstance.
+ * The Class ContentInstance.
  * 
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-public class OM2MContentInstance {
+public class ContentInstance {
 	
 	/** The app id. */
 	private String appId;
@@ -34,7 +34,7 @@ public class OM2MContentInstance {
 	/**
 	 * Instantiates a new OM2M content instance.
 	 */
-	public OM2MContentInstance() {}
+	public ContentInstance() {}
 
 	/**
 	 * Instantiates a new OM2M content instance.
@@ -43,7 +43,7 @@ public class OM2MContentInstance {
 	 * @param containerId the container id
 	 * @param body the body
 	 */
-	public OM2MContentInstance(String appId,  String containerId, String body) {
+	public ContentInstance(String appId,  String containerId, String body) {
 		super();
 		this.appId = appId;
 		this.containerId = containerId;

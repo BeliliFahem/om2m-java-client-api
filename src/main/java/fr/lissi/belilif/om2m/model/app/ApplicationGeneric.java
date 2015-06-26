@@ -11,16 +11,13 @@
  *     Belili Fahem -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
+package fr.lissi.belilif.om2m.model.app;
+
 /**
- * @author Belili Fahem - belili.fahem@gmail.com
+ * The Interface ApplicationGeneric.
  *
+ * @author Belili Fahem - belili.fahem@gmail.com
  */
-@XmlSchema(namespace = "http://uri.etsi.org/m2m", elementFormDefault = XmlNsForm.QUALIFIED, xmlns = {
-		@XmlNs(prefix = "om2m", namespaceURI = "http://uri.etsi.org/m2m"),
-		@XmlNs(prefix = "xmime", namespaceURI = "http://www.w3.org/2005/05/xmlmime") })
-package fr.lissi.belilif.om2m.model;
+public interface ApplicationGeneric {
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
-
+}

@@ -14,10 +14,10 @@
 package fr.lissi.belilif.om2m.model;
 
 /**
- * The Class OM2MContentInstancesResponse.
+ * The Class ContentInstancesResponse.
  *
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-public class OM2MContentInstancesResponse {
+public class ContentInstancesResponse {
 
 }

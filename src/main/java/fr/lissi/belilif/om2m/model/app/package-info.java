@@ -18,9 +18,7 @@
 @XmlSchema(namespace = "http://uri.etsi.org/m2m", elementFormDefault = XmlNsForm.QUALIFIED, xmlns = {
 		@XmlNs(prefix = "om2m", namespaceURI = "http://uri.etsi.org/m2m"),
 		@XmlNs(prefix = "xmime", namespaceURI = "http://www.w3.org/2005/05/xmlmime") })
-package fr.lissi.belilif.om2m.model;
-
+package fr.lissi.belilif.om2m.model.app;
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;
-

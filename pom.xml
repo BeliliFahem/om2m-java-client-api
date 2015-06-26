@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>OM2M_Java_API_MVN</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<artifactId>om2m-java-client-api</artifactId>
+	<version>0.3.0-SNAPSHOT</version>
 <!-- COMOILE SINGLE JAR : mvn clean compile assembly:single  -->
 	<dependencies>
 		<dependency>
@@ -60,5 +60,5 @@
 		</plugins>
 	</build>
 
-	<groupId>fr.lissi</groupId>
+	<groupId>fr.lissi.belilif</groupId>
 </project>

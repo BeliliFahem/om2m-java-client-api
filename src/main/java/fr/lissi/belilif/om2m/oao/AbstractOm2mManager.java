@@ -19,7 +19,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fr.lissi.belilif.om2m.model.OM2MSubscription;
+import fr.lissi.belilif.om2m.model.Subscription;
 
 /**
  * The Class AbstractOm2mManager.
@@ -74,10 +74,11 @@ public abstract class AbstractOm2mManager<ReqType, RespType> {
 	 * @param subscription the subscription
 	 * @return the int
 	 */
-	public abstract int subscribe(ReqType obj, OM2MSubscription subscription);
+	public abstract int subscribe(ReqType obj, Subscription subscription);
 	
 	/**
-	 * Gets the.
+	 * 
+	 * Gets by id only. Only the id must be defined in the object parameter.
 	 *
 	 * @param obj the obj
 	 * @return the resp type
@@ -89,7 +90,7 @@ public abstract class AbstractOm2mManager<ReqType, RespType> {
 	 *
 	 * @return the all
 	 */
-	public abstract List<RespType> getAll();
+	public abstract List<ReqType> getAll();
 	
 	/**
 	 * Collect the first n elements.

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -109,7 +110,7 @@ public class JAXBMapper {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Unmarshaller un = context.createUnmarshaller();
-			
+					
 			StringReader sr = new StringReader(XMLCode);
 			
 			Object obj = un.unmarshal(sr);

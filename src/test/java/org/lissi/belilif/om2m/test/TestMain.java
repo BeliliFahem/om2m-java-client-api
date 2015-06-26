@@ -13,22 +13,23 @@
  ******************************************************************************/
 package org.lissi.belilif.om2m.test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fr.lissi.belilif.om2m.model.OM2MApplication;
-import fr.lissi.belilif.om2m.model.OM2MApplicationResponse;
-import fr.lissi.belilif.om2m.model.OM2MContainer;
-import fr.lissi.belilif.om2m.model.OM2MContentInstance;
+import fr.lissi.belilif.om2m.model.NamedReference;
+import fr.lissi.belilif.om2m.model.Container;
+import fr.lissi.belilif.om2m.model.ContentInstance;
+import fr.lissi.belilif.om2m.model.app.Application;
+import fr.lissi.belilif.om2m.model.app.ApplicationsResp;
 import fr.lissi.belilif.om2m.oao.ApplicationManager;
 import fr.lissi.belilif.om2m.oao.ContainerManager;
 import fr.lissi.belilif.om2m.oao.ContentInstanceManager;
 import fr.lissi.belilif.om2m.oao.Om2mManagersFactorty;
 import fr.lissi.belilif.util.jaxb.JAXBMapper;
-
 
 /**
  * The Class TestMain.
@@ -43,30 +44,68 @@ public class TestMain {
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
-		
-//		scenarioTest1();
 
-//		testExistApp();
-		
-		testExistContainer();
+		// scenarioTest1();
+
+		// testExistApp();
+
+		// testExistContainer();
+
+		 testGetAllApps();
+
+//		genGetAllAppsReponseTest();
+
+
+	}
+	
+	public static void genGetAllAppsReponseTest(){
+		ArrayList<NamedReference> applicationCollection = new ArrayList<NamedReference>();
+		for (int i = 0; i < 4; i++) {
+			applicationCollection.add(new NamedReference("ID-" + i, "namedReferenceValue-"+i));
+		}
+		ApplicationsResp appsResp = new ApplicationsResp("accessRightIDX", applicationCollection, "",
+				"subscriptionsReferenceX", "mgmtObjsReferenceX");
+
+		System.out.println(JAXBMapper.objectToXMLString(appsResp));
 	}
 
 	/**
-	 * <pre>
-	 * This example do the the following tasks :
-	 * 1- create an application "MyApp1"
-	 * 2- create a DESCRIPTOR container
-	 * 3- create a container for data named "MyData1"
-	 * 4- create a data contentInstance
-	 * 5- subscribe to MyApp1 data
-	 * -- do the subscription
-	 * -- start the a monitor server sample (by OM2M)
-	 * -- add data to see the automatic notification in the monitor server sample
+	 * Test get all apps.
+	 */
+	private static void testGetAllApps() {
+
+		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
+		;
+
+		ApplicationManager appManager = (ApplicationManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.APP_MANAGER);
+
+		List<Application> apps = appManager.getAll();
+		for (Application application : apps) {
+			System.out.println("app >>> "+application.getAppId());
+		}
+
+	}
+
+	/**
 	 * 
-	 * </pre>.
+	 * <b>This example do the the following tasks :</b>
+	 * <ol>
+	 * <li>create an application "MyApp1"
+	 * <li>create a DESCRIPTOR container
+	 * <li>create a container for data named "MyData1"
+	 * <li>create a data contentInstance
+	 * <li>subscribe to MyApp1 data
+	 * <ul>
+	 * <li>do the subscription
+	 * <li>start the a monitor server sample (by OM2M)
+	 * <li>add data to see the automatic notification in the monitor server sample
+	 * </ul>
+	 * </ol>
+	 * 
 	 *
 	 * @author Belili Fahem - belili.fahem@gmail.com
 	 */
@@ -75,7 +114,7 @@ public class TestMain {
 		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
 
 		// 1- create an application "MyApp1"
-		OM2MApplication myApp1 = new OM2MApplication();
+		Application myApp1 = new Application();
 
 		String appId = "MyApp6";
 		myApp1.setAppId(appId);
@@ -87,20 +126,22 @@ public class TestMain {
 		appManager.create(myApp1);
 
 		// 2- create a DECRIPTOR container
-		ContainerManager containerManager = (ContainerManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
-		//		containerManager.addDecriptor(new OM2MContainer("DESCRIPTOR", myApp1)); // The DECRIPTOR container is defined by default, so we don
+		ContainerManager containerManager = (ContainerManager) Om2mManagersFactorty
+				.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
+		// containerManager.addDecriptor(new OM2MContainer("DESCRIPTOR", myApp1)); // The DECRIPTOR container is defined by
+		// default, so we don
 
 		// 3- create a container for data named "MyData1"
-		OM2MContainer container = new OM2MContainer(appId, "MyData1");
+		Container container = new Container(appId, "MyData1");
 		containerManager.create(container);
 		// MyData2
-		container = new OM2MContainer(appId, "MyData2");
+		container = new Container(appId, "MyData2");
 		containerManager.create(container);
 
 		// 4- create a data contentInstance
 		ContentInstanceManager contentInstanceManager = (ContentInstanceManager) Om2mManagersFactorty
 				.getManager(Om2mManagersFactorty.CONTENT_INSTANCE_MANAGER);
-		contentInstanceManager.create(new OM2MContentInstance(appId, "MyData1", "60"));
+		contentInstanceManager.create(new ContentInstance(appId, "MyData1", "60"));
 
 	}
 
@@ -112,10 +153,10 @@ public class TestMain {
 		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
 
 		// create OM2MApplication java object
-		OM2MApplication myApp1 = new OM2MApplication("MyApp1");
+		Application myApp1 = new Application("MyApp1");
 
 		ApplicationManager appManager = (ApplicationManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.APP_MANAGER);
-		System.out.println( appManager.exist(myApp1));
+		System.out.println(appManager.exist(myApp1));
 
 	}
 
@@ -123,14 +164,15 @@ public class TestMain {
 	 * Test exist container.
 	 */
 	private static void testExistContainer() {
-		
+
 		Om2mManagersFactorty.configure("http://127.0.0.1:8080", "Basic YWRtaW46YWRtaW4=");
-		
-		ContainerManager containerManager = (ContainerManager) Om2mManagersFactorty.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
-		
-		OM2MContainer container = new OM2MContainer("MyApp6", "MyData1");
-		System.out.println( containerManager.exist(container) );
-		
+
+		ContainerManager containerManager = (ContainerManager) Om2mManagersFactorty
+				.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
+
+		Container container = new Container("MyApp6", "MyData1");
+		System.out.println(containerManager.exist(container));
+
 	}
 
 }

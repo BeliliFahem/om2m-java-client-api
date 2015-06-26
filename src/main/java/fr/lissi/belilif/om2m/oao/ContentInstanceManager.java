@@ -19,9 +19,9 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 
-import fr.lissi.belilif.om2m.model.OM2MContentInstance;
-import fr.lissi.belilif.om2m.model.OM2MContentInstancesResponse;
-import fr.lissi.belilif.om2m.model.OM2MSubscription;
+import fr.lissi.belilif.om2m.model.ContentInstance;
+import fr.lissi.belilif.om2m.model.ContentInstancesResponse;
+import fr.lissi.belilif.om2m.model.Subscription;
 import fr.lissi.belilif.om2m.rest.WebServiceActions;
 import fr.lissi.belilif.util.jaxb.JAXBMapper;
 
@@ -32,7 +32,7 @@ import fr.lissi.belilif.util.jaxb.JAXBMapper;
  *
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInstance, OM2MContentInstancesResponse> {
+public class ContentInstanceManager extends AbstractOm2mManager<ContentInstance, ContentInstancesResponse> {
 
 	/**
 	 * Instantiates a new content instance manager.
@@ -49,7 +49,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#create(java.lang.Object)
 	 */
 	@Override
-	public int create(OM2MContentInstance obj) {
+	public int create(ContentInstance obj) {
 		LOGGER.info("Create ContentInstance for " + obj.getAppId()+"/"+obj.getContainerId());
 		int resp = -1;
 		try {
@@ -77,16 +77,16 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#delete(java.lang.Object)
 	 */
 	@Override
-	public int delete(OM2MContentInstance obj) {
+	public int delete(ContentInstance obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	/* (non-Javadoc)
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#subscribe(java.lang.Object, fr.lissi.belilif.om2m.model.OM2MSubscription)
+	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#subscribe(java.lang.Object, fr.lissi.belilif.om2m.model.Subscription)
 	 */
 	@Override
-	public int subscribe(OM2MContentInstance obj, OM2MSubscription subscription) {
+	public int subscribe(ContentInstance obj, Subscription subscription) {
 		LOGGER.info("Create : \n" + JAXBMapper.objectToXMLString(obj));
 		int resp = -1;
 		try {
@@ -110,7 +110,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getAll()
 	 */
 	@Override
-	public List<OM2MContentInstancesResponse> getAll() {
+	public List<ContentInstance> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -119,7 +119,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getFirstN(int)
 	 */
 	@Override
-	public List<OM2MContentInstancesResponse> getFirstN(int n) {
+	public List<ContentInstancesResponse> getFirstN(int n) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -128,7 +128,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#searchByKeywords(java.util.List)
 	 */
 	@Override
-	public List<OM2MContentInstancesResponse> searchByKeywords(List<String> keywords) {
+	public List<ContentInstancesResponse> searchByKeywords(List<String> keywords) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,7 +137,7 @@ public class ContentInstanceManager extends AbstractOm2mManager<OM2MContentInsta
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#get(java.lang.Object)
 	 */
 	@Override
-	public OM2MContentInstancesResponse get(OM2MContentInstance obj) {
+	public ContentInstancesResponse get(ContentInstance obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}

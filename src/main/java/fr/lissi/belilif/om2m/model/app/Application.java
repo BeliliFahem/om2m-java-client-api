@@ -11,7 +11,8 @@
  *     Belili Fahem -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
-package fr.lissi.belilif.om2m.model;
+
+package fr.lissi.belilif.om2m.model.app;
 
 import java.util.List;
 
@@ -24,14 +25,13 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * The Class OM2MApplicationResponse.
- * 
+ * The Class Application.
+ *
  * @author Belili Fahem - belili.fahem@gmail.com
- * 
  */
 @XmlRootElement(name = "application")
 @XmlType(propOrder = { "appId", "searchStrings" })
-public class OM2MApplicationResponse {
+public class Application implements ApplicationGeneric {
 
 	/** The app id. */
 	private String appId;
@@ -40,20 +40,30 @@ public class OM2MApplicationResponse {
 	private List<String> searchStrings;
 
 	/**
-	 * Instantiates a new OM2M application response.
+	 * Instantiates a new OM2M application.
 	 */
-	public OM2MApplicationResponse() {}
+	public Application() {}
 
 	/**
-	 * Instantiates a new OM2M application response.
+	 * Instantiates a new OM2M application.
 	 *
 	 * @param appId the app id
 	 * @param searchStrings the search strings
 	 */
-	public OM2MApplicationResponse(String appId, List<String> searchStrings) {
+	public Application(String appId, List<String> searchStrings) {
 		super();
 		this.appId = appId;
 		this.searchStrings = searchStrings;
+	}
+	
+	/**
+	 * Instantiates a new OM2M application.
+	 *
+	 * @param appId the app id
+	 */
+	public Application(String appId) {
+		super();
+		this.appId = appId;
 	}
 
 	/**

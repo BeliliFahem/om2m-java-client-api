@@ -18,12 +18,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
- * The Class OM2MSubscription.
+ * The Class Subscription.
  * 
  * @author Belili Fahem - belili.fahem@gmail.com
  */
 @XmlRootElement(name = "subscription")
-public class OM2MSubscription {
+public class Subscription {
 
 	/**  URL of the listener. */
 	private String contact;
@@ -31,14 +31,14 @@ public class OM2MSubscription {
 	/**
 	 * Instantiates a new OM2M subscription.
 	 */
-	public OM2MSubscription() {}
+	public Subscription() {}
 
 	/**
 	 * Instantiates a new OM2M subscription.
 	 *
 	 * @param contact the contact
 	 */
-	public OM2MSubscription(String contact) {
+	public Subscription(String contact) {
 		super();
 		this.contact = contact;
 	}

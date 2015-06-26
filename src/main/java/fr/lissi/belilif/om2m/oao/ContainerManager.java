@@ -19,9 +19,9 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 
-import fr.lissi.belilif.om2m.model.OM2MContainer;
-import fr.lissi.belilif.om2m.model.OM2MContainerResponse;
-import fr.lissi.belilif.om2m.model.OM2MSubscription;
+import fr.lissi.belilif.om2m.model.Container;
+import fr.lissi.belilif.om2m.model.ContainerResponse;
+import fr.lissi.belilif.om2m.model.Subscription;
 import fr.lissi.belilif.om2m.rest.WebServiceActions;
 import fr.lissi.belilif.util.jaxb.JAXBMapper;
 
@@ -32,7 +32,7 @@ import fr.lissi.belilif.util.jaxb.JAXBMapper;
  *
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MContainerResponse> {
+public class ContainerManager extends AbstractOm2mManager<Container, ContainerResponse> {
 
 	/**
 	 * Instantiates a new container manager.
@@ -49,7 +49,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#create(java.lang.Object)
 	 */
 	@Override
-	public int create(OM2MContainer obj) {
+	public int create(Container obj) {
 		// verifier si le container existe avant d'en créer : laisser ça au utilisateur
 //		AbstractOm2mManager om2mManager = Om2mManagersFactorty.getManager(Om2mManagersFactorty.CONTAINER_MANAGER);
 //		OM2MContainerResponse respExist = (OM2MContainerResponse) om2mManager.get(obj);
@@ -83,7 +83,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @param container the container
 	 * @return the int
 	 */
-	public int addDecriptor(OM2MContainer container) {
+	public int addDecriptor(Container container) {
 		container.setId("DESCRIPTOR");	
 		return create(container);
 	}
@@ -92,16 +92,16 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#delete(java.lang.Object)
 	 */
 	@Override
-	public int delete(OM2MContainer obj) {
+	public int delete(Container obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	/* (non-Javadoc)
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#subscribe(java.lang.Object, fr.lissi.belilif.om2m.model.OM2MSubscription)
+	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#subscribe(java.lang.Object, fr.lissi.belilif.om2m.model.Subscription)
 	 */
 	@Override
-	public int subscribe(OM2MContainer obj, OM2MSubscription subscription) {
+	public int subscribe(Container obj, Subscription subscription) {
 		// contentInstances/subscriptions
 		return 0;
 	}
@@ -110,7 +110,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getAll()
 	 */
 	@Override
-	public List<OM2MContainerResponse> getAll() {
+	public List<Container> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	} 
@@ -119,7 +119,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getFirstN(int)
 	 */
 	@Override
-	public List<OM2MContainerResponse> getFirstN(int n) {
+	public List<ContainerResponse> getFirstN(int n) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -128,7 +128,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#searchByKeywords(java.util.List)
 	 */
 	@Override
-	public List<OM2MContainerResponse> searchByKeywords(List<String> keywords) {
+	public List<ContainerResponse> searchByKeywords(List<String> keywords) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,13 +137,13 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#get(java.lang.Object)
 	 */
 	@Override
-	public OM2MContainerResponse get(OM2MContainer obj) {
-		OM2MContainerResponse containerResponse = null;
+	public ContainerResponse get(Container obj) {
+		ContainerResponse containerResponse = null;
 		String resp = null;
 		try {
 			resp = WebServiceActions
 					.doGet(this.OM2MUrlBase + "applications/" + obj.getAppId() + "/containers/" + obj.getId(), headers);
-			if (resp.equals("200")) containerResponse = new OM2MContainerResponse();
+			if (resp.equals("200")) containerResponse = new ContainerResponse();
 		} catch (HttpResponseException e) {
 			resp = e.getStatusCode() + "";
 			System.out.println(e.getStatusCode() + " / " + e.getMessage());
@@ -163,7 +163,7 @@ public class ContainerManager extends AbstractOm2mManager<OM2MContainer, OM2MCon
 	 * @param obj the obj
 	 * @return true, if successful
 	 */
-	public boolean exist(OM2MContainer obj) {
+	public boolean exist(Container obj) {
 		boolean containerResponse = false;
 		String resp = null;
 		try {

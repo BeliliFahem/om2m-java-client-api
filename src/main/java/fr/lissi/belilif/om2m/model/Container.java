@@ -20,13 +20,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
- * The Class OM2MContainer.
+ * The Class Container.
  * 
  * @author Belili Fahem - belili.fahem@gmail.com
  * 
  */
 @XmlRootElement(name = "container")
-public class OM2MContainer {
+public class Container {
 
 	/** The container id. */
 	private String id;
@@ -37,7 +37,7 @@ public class OM2MContainer {
 	/**
 	 * Instantiates a new OM2M container.
 	 */
-	public OM2MContainer() {
+	public Container() {
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class OM2MContainer {
 	 * @param containerId
 	 *            the container id
 	 */
-	public OM2MContainer(String appId, String containerId) {
+	public Container(String appId, String containerId) {
 		super();
 		this.id = containerId;
 		this.appId = appId;

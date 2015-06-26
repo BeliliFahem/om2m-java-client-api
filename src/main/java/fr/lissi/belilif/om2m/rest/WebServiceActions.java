@@ -20,10 +20,12 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -116,8 +118,10 @@ public class WebServiceActions {
 					HttpEntity entity = response.getEntity();
 
 					if (entity != null) {
-						// TODO respString = EntityUtils.toString(entity);
-						respString = response.getStatusLine().getStatusCode() + "";
+						// TODO to use for performance in the future
+						int statusCode = response.getStatusLine().getStatusCode();
+						ResponseHandler<String> handler = new BasicResponseHandler();
+						respString = handler.handleResponse(response);
 					}
 					EntityUtils.consume(entity);
 				} finally {
