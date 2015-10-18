@@ -1,4 +1,4 @@
-# OM2M Java API
+# OM2M Java API - ChangeLog
 ## Version 0.6.0 - Major Upadate 18-10-2015 :
 #### Highlights
 * Manage Applications
@@ -20,6 +20,9 @@
 
 * Logging richer and more efficient.
 
+* Add JUnit tests.
+
+* Optimisation of the Om2mManagerFactory.
 
 
 ***
