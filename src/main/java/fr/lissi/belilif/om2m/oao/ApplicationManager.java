@@ -8,24 +8,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Belili Fahem -  Management and initial specification,
+ *     Belili Fahem (belili.fahem@gmail.com) -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
 package fr.lissi.belilif.om2m.oao;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
+import org.eclipse.om2m.commons.resource.Application;
+import org.eclipse.om2m.commons.resource.Applications;
+import org.eclipse.om2m.commons.resource.ReferenceToNamedResource;
+import org.eclipse.om2m.commons.resource.Resource;
 
-import fr.lissi.belilif.om2m.model.NamedReference;
 import fr.lissi.belilif.om2m.model.Subscription;
-import fr.lissi.belilif.om2m.model.app.Application;
-import fr.lissi.belilif.om2m.model.app.ApplicationGeneric;
-import fr.lissi.belilif.om2m.model.app.ApplicationResp;
-import fr.lissi.belilif.om2m.model.app.ApplicationsResp;
+import fr.lissi.belilif.om2m.rest.HttpGetSimpleResp;
 import fr.lissi.belilif.om2m.rest.WebServiceActions;
 import fr.lissi.belilif.util.jaxb.JAXBMapper;
 
@@ -34,7 +35,7 @@ import fr.lissi.belilif.util.jaxb.JAXBMapper;
  *
  * @author Belili Fahem - belili.fahem@gmail.com
  */
-public class ApplicationManager extends AbstractOm2mManager<Application, ApplicationGeneric> {
+public class ApplicationManager extends Om2mManager<Application> {
 
 	/**
 	 * Instantiates a new application manager.
@@ -44,15 +45,14 @@ public class ApplicationManager extends AbstractOm2mManager<Application, Applica
 	 * @param authorization
 	 *            the authorization
 	 */
-	public ApplicationManager(String OM2MUrlBase, String authorization) {
+	ApplicationManager(String OM2MUrlBase, String authorization) {
 		super(OM2MUrlBase, authorization);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#create(java.lang.Object)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#create(java.lang.Object)
 	 */
 	@Override
 	public int create(Application obj) {
@@ -65,14 +65,16 @@ public class ApplicationManager extends AbstractOm2mManager<Application, Applica
 			resp = WebServiceActions.doPost(this.OM2MUrlBase + "applications", appInXML, this.headers);
 			LOGGER.info("Application '" + obj.getAppId() + "' creation status : " + resp);
 		} catch (HttpResponseException e) {
-			// TODO elevate exception
 			resp = e.getStatusCode();
 			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage() + "\n"
 					+ "Unable to create the application '" + obj.getAppId() + "' with " + this.OM2MUrlBase + "applications");
 		} catch (ClientProtocolException e) {
-			LOGGER.error("ClientProtocolException - " + e.getMessage());
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch (ConnectException e) {
+			LOGGER.error(e.getMessage() + ". \nThe server '" + this.OM2MUrlBase.substring(7, 21) + "' is unreachable.");
 		} catch (IOException e) {
-			LOGGER.error("IOException - " + e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 		return resp;
 	}
@@ -80,131 +82,157 @@ public class ApplicationManager extends AbstractOm2mManager<Application, Applica
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#delete(java.lang.Object)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#delete(java.lang.Object)
 	 */
 	@Override
 	public int delete(Application obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		HttpGetSimpleResp resp;
+		int appResponse = -1;
+		try {
+			resp = WebServiceActions.doDelete(this.OM2MUrlBase + "applications/" + obj.getAppId(), headers);
+			appResponse = resp.getStatusCode();
+		} catch (HttpResponseException e) {
+			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage());
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch (ConnectException e) {
+			LOGGER.error(e.getMessage() + ". \nThe server '" + this.OM2MUrlBase.substring(7, 21) + "' is unreachable.");
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage());
+		}
+		return appResponse;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#subscribe(java.lang.Object,
-	 * fr.lissi.belilif.om2m.model.Subscription)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#subscribe(java.lang.Object, fr.lissi.belilif.om2m.model.Subscription)
 	 */
 	@Override
 	public int subscribe(Application obj, Subscription subscription) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO subscribe
+		LOGGER.warn("Methode not implemented.");
+		return -1;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getAll()
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#getAll()
 	 */
 	@Override
-	public List<Application> getAll() {
+	public List<Application> getAll(Resource resource) {
 		// TODO manage exceptions
-		String resp = null;
+		HttpGetSimpleResp resp = null;
 		try {
 			resp = WebServiceActions.doGet(this.OM2MUrlBase + "applications", headers);
 		} catch (HttpResponseException e) {
-			// TODO manage the exception
-			e.printStackTrace();
+			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage());
 		} catch (ClientProtocolException e) {
-			// TODO manage the exception
-			e.printStackTrace();
+			LOGGER.error(e);
+		} catch (ConnectException e) {
+			LOGGER.error(e.getMessage() + ". \nThe server '" + this.OM2MUrlBase.substring(7, 21) + "' is unreachable.");
 		} catch (IOException e) {
-			// TODO manage the exception
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
-
 		// xml to object
-		ApplicationsResp appsResp = (ApplicationsResp) JAXBMapper.XMLStringToObject(resp, ApplicationsResp.class);
+		Applications appsResp = (Applications) JAXBMapper.XMLStringToObject(resp.getResult(), Applications.class);
 		List<Application> apps = new ArrayList<Application>();
-		for (NamedReference namedRef : appsResp.getApplicationCollection()) {
-			apps.add(new Application(namedRef.getId()));
+		LOGGER.info("MODEL APPS : " + appsResp);
+		for (ReferenceToNamedResource refToNamedRes : appsResp.getApplicationCollection().getNamedReference()) {
+			apps.add(new Application(refToNamedRes.getId()));
 		}
-
 		return apps;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#getFirstN(int)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#getFirstN(int)
 	 */
 	@Override
-	public List<ApplicationGeneric> getFirstN(int n) {
-		// TODO Auto-generated method stub
+	public List<Application> getFirstN(int n) {
+		// TODO getFirstN
+		LOGGER.warn("Methode not implemented.");
 		return null;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#searchByKeywords(java.util.List)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#searchByKeywords(java.util.List)
 	 */
 	@Override
-	public List<ApplicationGeneric> searchByKeywords(List<String> keywords) {
-		// TODO Auto-generated method stub
+	public List<Application> searchByKeywords(List<String> keywords) {
+		// TODO searchByKeywords
+		LOGGER.warn("Methode not implemented.");
 		return null;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see fr.lissi.belilif.om2m.oao.AbstractOm2mManager#get(java.lang.Object)
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#get(java.lang.Object)
 	 */
 	@Override
-	public ApplicationResp get(Application obj) {
-		ApplicationResp appResponse = null;
-		String resp = null;
+	public Application get(Application obj) {
+		return get(obj.getAppId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.lissi.belilif.om2m.oao.Om2mManager#get(java.lang.String)
+	 */
+	@Override
+	public Application get(String id) {
+		Application appResponse = null;
+
+		HttpGetSimpleResp resp;
 		try {
-			resp = WebServiceActions.doGet(this.OM2MUrlBase + "applications/" + obj.getAppId(), headers);
-			if (resp.equals("200"))
-				appResponse = new ApplicationResp();
+			resp = WebServiceActions.doGet(this.OM2MUrlBase + "applications/" + id, headers);
+			if (resp.getStatusCode() == 200)
+				appResponse = (Application) JAXBMapper.XMLStringToObject(resp.getResult(), Application.class);
 		} catch (HttpResponseException e) {
-			resp = e.getStatusCode() + "";
 			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage());
 		} catch (ClientProtocolException e) {
-			// TODO ClientProtocolException
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch (ConnectException e) {
+			LOGGER.error(e.getMessage() + ". \nThe server '" + this.OM2MUrlBase.substring(7, 21) + "' is unreachable.");
 		} catch (IOException e) {
-			// TODO IOException
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
+
 		return appResponse;
 	}
 
 	/**
 	 * Exist.
-	 *
+	 * 
 	 * @param obj
 	 *            the obj
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean exist(Application obj) {
-		boolean appResponse = false;
-		String resp = null;
+		HttpGetSimpleResp resp;
 		try {
 			resp = WebServiceActions.doGet(this.OM2MUrlBase + "applications/" + obj.getAppId(), headers);
-			if (resp.equals("200"))
-				appResponse = true;
+			if (resp.getStatusCode() == 200)
+				return true;
 		} catch (HttpResponseException e) {
-			resp = e.getStatusCode() + "";
-			LOGGER.error("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage());
+			// LOGGER.warn("HttpResponseException - " + e.getStatusCode() + " / " + e.getMessage());
 		} catch (ClientProtocolException e) {
-			// TODO ClientProtocolException
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch (ConnectException e) {
+			LOGGER.error(e.getMessage() + ". \nThe server '" + this.OM2MUrlBase.substring(7, 21) + "' is unreachable.");
 		} catch (IOException e) {
-			// TODO IOException
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
-		return appResponse;
+		return false;
 	}
 
 }

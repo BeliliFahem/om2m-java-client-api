@@ -5,3 +5,5 @@ logs/
 
 target/
 
+src/test/java/org/lissi/belilif/om2m/test/TestMain.java
+

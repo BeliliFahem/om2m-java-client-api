@@ -1,6 +1,5 @@
-OpenM2M Java API contributors:
+#OpenM2M Java API contributors:
 
-Programming
------------
+#### Management and initial specification, conception, implementation, test and documentation :
 
 Belili Fahem - belili.fahem@gmail.com

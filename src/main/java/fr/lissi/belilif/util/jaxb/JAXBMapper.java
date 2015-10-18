@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

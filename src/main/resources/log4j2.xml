@@ -1,50 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--  
-/*******************************************************************************
- * Copyright (c) 2014-2015 LiSSi (www.lab.lissi.fr)
- * 122 rue Paul Armangot, 94400 Vitry-Sur-Seine - France.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Belili Fahem -  Management and initial specification,
- *         conception, implementation, test and documentation.
- ******************************************************************************/
-
-/**
- * @author Belili Fahem - belili.fahem@gmail.com
- */
- -->
+<!-- /******************************************************************************* 
+	* Copyright (c) 2014-2015 LiSSi (www.lab.lissi.fr) * 122 rue Paul Armangot, 
+	94400 Vitry-Sur-Seine - France. * * All rights reserved. This program and 
+	the accompanying materials * are made available under the terms of the Eclipse 
+	Public License v1.0 * which accompanies this distribution, and is available 
+	at * http://www.eclipse.org/legal/epl-v10.html * * Contributors: * Belili 
+	Fahem - Management and initial specification, * conception, implementation, 
+	test and documentation. ******************************************************************************/ 
+	/** * @author Belili Fahem - belili.fahem@gmail.com */ -->
 
 
 <Configuration status="warn" name="MyApp" packages="">
-<!--   <Appenders>
-    <File name="mainFile" fileName="logs/om2mobj.log">
-      <PatternLayout>
-        <Pattern>%d %p %C{1}:%L [%t] : %m%n</Pattern>
-      </PatternLayout>
-    </File>
-  </Appenders>
-  <Loggers>
-    <Root level="debug">
-      <AppenderRef ref="mainFile"/>
-    </Root>
-  </Loggers> -->
-  
-  <Appenders>
-    <Console name="STDOUT" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d %p %C{1}:%L [%t] : %m%n"/>
-    </Console>
-  </Appenders>
-  
-  <Loggers>
-    <Root level="info">
-      <AppenderRef ref="STDOUT"/>
-    </Root>
-  </Loggers>
-  
-  
+	<!-- <Appenders> <File name="mainFile" fileName="logs/om2mobj.log"> <PatternLayout> 
+		<Pattern>%d %p %C{1}:%L [%t] : %m%n</Pattern> </PatternLayout> </File> </Appenders> 
+		<Loggers> <Root level="debug"> <AppenderRef ref="mainFile"/> </Root> </Loggers> -->
+
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d  %p %C{1}:%L - %M : %m%n" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+	</Loggers>
+
+
+
+
 </Configuration>
