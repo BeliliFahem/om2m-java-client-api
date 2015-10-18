@@ -6,7 +6,7 @@ See more about OM2M Project : http://www.eclipse.org/om2m/.
 
 ## About OM2M Java API
 
-For a Java developer, develop solutions based on "Open M2M" server while enjoying all its features and services, is another concern in addition to business concerns. It is from this realization that the need for an API to communicate with the server "Open M2M" by object was born.
+For a Java developer, develop solutions based on "Open M2M" server while enjoying all its features and services, is another concern in addition to business concerns. It is from this realization that the need for an API to communicate with the server "Open M2M" by object %100 Java, was born.
 
 # Implemented (user)functions in this version
 
@@ -17,12 +17,25 @@ For a Java developer, develop solutions based on "Open M2M" server while enjoyin
 * Retrieve all applications.
 * Verify the existence of an application.
 
+<<<<<<< HEAD
 ### Manage containers
 * Create a container.
 * Delete a container.
 * Retrieve a container.
 * Retrieve all containers.
 * Verify the existence of a container.
+=======
+#Upadate 26-06-2015 :
+* Retrieve all applications, from the server, as list of Java objects. 
+
+# Implemented functions in this version
+* Create an application
+* Create a container
+* Create a content Instance
+* Verify if an application exist
+* Verify if a container exist
+* Retrieve all applications, from the server, as list of Java objects.
+>>>>>>> edf518adbc0961f7e616606f0d830a60dd20ffe4
 
 ### Manage Content Instances
 * Create a Content Instance.
