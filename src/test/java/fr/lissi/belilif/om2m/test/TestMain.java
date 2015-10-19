@@ -11,7 +11,7 @@
  *     Belili Fahem -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
-package org.lissi.belilif.om2m.test;
+package fr.lissi.belilif.om2m.test;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -25,16 +25,17 @@ import org.eclipse.om2m.commons.resource.Application;
 import org.eclipse.om2m.commons.resource.Base64Binary;
 import org.eclipse.om2m.commons.resource.Container;
 import org.eclipse.om2m.commons.resource.ContentInstance;
-import org.eclipse.om2m.commons.resource.Resource;
 import org.eclipse.om2m.commons.resource.SearchStrings;
 
-import fr.lissi.belilif.om2m.oao.Om2mManager;
 import fr.lissi.belilif.om2m.oao.ApplicationManager;
 import fr.lissi.belilif.om2m.oao.ContainerManager;
 import fr.lissi.belilif.om2m.oao.ContentInstanceManager;
+import fr.lissi.belilif.om2m.oao.Om2mManager;
 import fr.lissi.belilif.om2m.oao.Om2mManagersFactorty;
 
 /**
+ * <b>THIS CLASS IS NOT A REFERENCE. PLEASE SEE fr.lissi.belilif.om2m.test.Om2mManagerTest class.</b> <br/>
+ * 
  * The Class TestMain.
  *
  * @author Belili Fahem - belili.fahem@gmail.com
@@ -58,7 +59,7 @@ public class TestMain {
 
 		// isServerReachable();
 
-		getAllContainer(APP_ID_TEST);
+		// getAllContainer(APP_ID_TEST);
 
 		/// testDeleteApp();
 

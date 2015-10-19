@@ -46,7 +46,7 @@ public class ContainerManager extends Om2mManager<Container> {
 	 * @param authorization
 	 *            the authorization
 	 */
-	public ContainerManager(String hostName, String authorization) {
+	ContainerManager(String hostName, String authorization) {
 		super(hostName, authorization);
 	}
 

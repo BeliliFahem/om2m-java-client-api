@@ -11,7 +11,7 @@
  *     Belili Fahem (belili.fahem@gmail.com) -  Management and initial specification,
  *         conception, implementation, test and documentation.
  ******************************************************************************/
-package org.lissi.belilif.om2m.test;
+package fr.lissi.belilif.om2m.test;
 
 import java.util.List;
 

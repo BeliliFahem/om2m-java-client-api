@@ -44,7 +44,7 @@ public class ContentInstanceManager extends Om2mManager<ContentInstance> {
 	 * @param hostName            the host name
 	 * @param authorization            the authorization
 	 */
-	public ContentInstanceManager(String hostName, String authorization) {
+	ContentInstanceManager(String hostName, String authorization) {
 		super(hostName, authorization);
 	}
 
